@@ -52,7 +52,7 @@
             <div id="glbb1_form" class="hidden">
                 <label for="kecepatanawalInput1">Kecepatan awal (m/s) :</label>
                 <input type="number" id="kecepatanawalInput1" name="v0">
-                <label for="percepatanInput1">Percepatan (m/s2) :</label>
+                <label for="percepatanInput1">Percepatan (m/s²) :</label>
                 <input type="number" id="percepatanInput1" name="a">
                 <label for="waktuInput1">Waktu (s) :</label>
                 <input type="number" id="waktuInput1" name="t">
@@ -62,13 +62,13 @@
                 <input type="number" id="kecepatanawalInput2" name="v0">
                 <label for="waktuInput2">Waktu (s) :</label>
                 <input type="number" id="waktuInput2" name="t">
-                <label for="percepatanInput2">Percepatan (m/s2) :</label>
+                <label for="percepatanInput2">Percepatan (m/s²) :</label>
                 <input type="number" id="percepatanInput2" name="a">
             </div>
             <div id="glbb3_form" class="hidden">
                 <label for="kecepatanawalInput3">Kecepatan awal (m/s) :</label>
                 <input type="number" id="kecepatanawalInput3" name="v0">
-                <label for="percepatanInput3">Percepatan (m/s2) :</label>
+                <label for="percepatanInput3">Percepatan (m/s²) :</label>
                 <input type="number" id="percepatanInput3" name="a">
                 <label for="jarakInput">Jarak (m) :</label>
                 <input type="number" id="jarakInput" name="s">
@@ -76,11 +76,11 @@
 
             <button type="button" class="btn btn-primary" onclick="calculate()">Hitung</button>
             <div class="mt-3">
-                <label for="result">Hasil:</label>
+                <label id="resultLabel" for="result">Hasil:</label>
                 <input type="text" class="form-control" id="result" readonly>
             </div>
         </form>
-        <p>Copyright 2023 © Kelompok 1 Sciencopat</p>
+        <p>Copyright 2023 © Kelompok 1 P5 - P2RA Sciencopat</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
@@ -94,12 +94,16 @@
 
             if (selectedGl === "GLB") {
                 document.getElementById("glb_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil jarak:";
             } else if (selectedGl === "GLBB1") {
                 document.getElementById("glbb1_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil kecepatan akhir:";
             } else if (selectedGl === "GLBB2") {
                 document.getElementById("glbb2_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil jarak:";
             } else if (selectedGl === "GLBB3") {
                 document.getElementById("glbb3_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil kecepatan akhir kuadrat (Vt²):";
             }
         }
 
@@ -107,6 +111,20 @@
             var gl = document.getElementById("gl").value;
             var result = 0;
             var kecepatanInput, waktuInput, waktuInput1, waktuInput2, kecepatanawalInput1, kecepatanawalInput2, kecepatanawalInput3, percepatanInput1, percepatanInput2, percepatanInput3, jarakInput;
+
+            if (gl === "GLB") {
+                document.getElementById("glb_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil jarak:";
+            } else if (gl === "GLBB1") {
+                document.getElementById("glbb1_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil kecepatan akhir:";
+            } else if (gl === "GLBB2") {
+                document.getElementById("glbb2_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil jarak:";
+            } else if (gl === "GLBB3") {
+                document.getElementById("glbb3_form").classList.remove("hidden");
+                document.getElementById("resultLabel").innerText = "Hasil kecepatan akhir kuadrat (Vt²):";
+            }
 
             switch (gl) {
                 case "GLB":
