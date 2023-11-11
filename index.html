@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana Gerak Lurus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        input,
+        select,
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-center mb-4">Kalkulator Sederhana Gerak Lurus</h3>
+        <form>
+            <label for="gl">Pilih Jenis Gerak:</label>
+            <select id="gl" onchange="showForm()">
+                <option value="">-- Pilih salah satu --</option>
+                <option value="GLB">GLB</option>
+                <option value="GLBB1">GLBB 1</option>
+                <option value="GLBB2">GLBB 2</option>
+                <option value="GLBB3">GLBB 3</option>
+            </select>
+
+            <div id="glb_form" class="hidden">
+                <label for="kecepatanInput">Kecepatan (m/s) :</label>
+                <input type="number" id="kecepatanInput" name="v">
+                <label for="waktuInput">Waktu (s) :</label>
+                <input type="number" id="waktuInput" name="t">
+            </div>
+            <div id="glbb1_form" class="hidden">
+                <label for="kecepatanawalInput1">Kecepatan awal (m/s) :</label>
+                <input type="number" id="kecepatanawalInput1" name="v0">
+                <label for="percepatanInput1">Percepatan (m/s2) :</label>
+                <input type="number" id="percepatanInput1" name="a">
+                <label for="waktuInput1">Waktu (s) :</label>
+                <input type="number" id="waktuInput1" name="t">
+            </div>
+            <div id="glbb2_form" class="hidden">
+                <label for="kecepatanawalInput2">Kecepatan awal (m/s) :</label>
+                <input type="number" id="kecepatanawalInput2" name="v0">
+                <label for="waktuInput2">Waktu (s) :</label>
+                <input type="number" id="waktuInput2" name="t">
+                <label for="percepatanInput2">Percepatan (m/s2) :</label>
+                <input type="number" id="percepatanInput2" name="a">
+            </div>
+            <div id="glbb3_form" class="hidden">
+                <label for="kecepatanawalInput3">Kecepatan awal (m/s) :</label>
+                <input type="number" id="kecepatanawalInput3" name="v0">
+                <label for="percepatanInput3">Percepatan (m/s2) :</label>
+                <input type="number" id="percepatanInput3" name="a">
+                <label for="jarakInput">Jarak (m) :</label>
+                <input type="number" id="jarakInput" name="s">
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="calculate()">Hitung</button>
+            <div class="mt-3">
+                <label for="result">Hasil:</label>
+                <input type="text" class="form-control" id="result" readonly>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        function showForm() {
+            document.getElementById("glb_form").classList.add("hidden");
+            document.getElementById("glbb1_form").classList.add("hidden");
+            document.getElementById("glbb2_form").classList.add("hidden");
+            document.getElementById("glbb3_form").classList.add("hidden");
+
+            var selectedGl = document.getElementById("gl").value;
+
+            if (selectedGl === "GLB") {
+                document.getElementById("glb_form").classList.remove("hidden");
+            } else if (selectedGl === "GLBB1") {
+                document.getElementById("glbb1_form").classList.remove("hidden");
+            } else if (selectedGl === "GLBB2") {
+                document.getElementById("glbb2_form").classList.remove("hidden");
+            } else if (selectedGl === "GLBB3") {
+                document.getElementById("glbb3_form").classList.remove("hidden");
+            }
+        }
+
+        function calculate() {
+            var gl = document.getElementById("gl").value;
+            var result = 0;
+            var kecepatanInput, waktuInput, waktuInput1, waktuInput2, kecepatanawalInput1, kecepatanawalInput2, kecepatanawalInput3, percepatanInput1, percepatanInput2, percepatanInput3, jarakInput;
+
+            switch (gl) {
+                case "GLB":
+                    kecepatanInput = parseFloat(document.getElementById("kecepatanInput").value);
+                    waktuInput = parseFloat(document.getElementById("waktuInput").value);
+                    result = kecepatanInput * waktuInput;
+                    break;
+                case "GLBB1":
+                    kecepatanawalInput1 = parseFloat(document.getElementById("kecepatanawalInput1").value);
+                    percepatanInput1 = parseFloat(document.getElementById("percepatanInput1").value);
+                    waktuInput1 = parseFloat(document.getElementById("waktuInput1").value);
+                    result = kecepatanawalInput1 + percepatanInput1 * waktuInput1;
+                    break;
+                case "GLBB2":
+                    kecepatanawalInput2 = parseFloat(document.getElementById("kecepatanawalInput2").value);
+                    waktuInput2 = parseFloat(document.getElementById("waktuInput2").value);
+                    percepatanInput2 = parseFloat(document.getElementById("percepatanInput2").value);
+                    result = kecepatanawalInput2 * waktuInput2 + 0.5 * percepatanInput2 * waktuInput2 * waktuInput2;
+                    break;
+                case "GLBB3":
+                    kecepatanawalInput3 = parseFloat(document.getElementById("kecepatanawalInput3").value);
+                    percepatanInput3 = parseFloat(document.getElementById("percepatanInput3").value);
+                    jarakInput = parseFloat(document.getElementById("jarakInput").value);
+                    result = kecepatanawalInput3 * kecepatanawalInput3 + 2 * percepatanInput3 * jarakInput;
+                    break;
+                default:
+                    result = "Invalid calculation type";
+            }
+
+            document.getElementById("result").value = result;
+        }
+    </script>
+</body>
+</html>
